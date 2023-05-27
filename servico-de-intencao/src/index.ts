@@ -1,65 +1,41 @@
 import express, { Request, Response } from 'express';
-import getCustomRepository from 'typeorm';
-import createConnection from 'mysql2';
-import Connection from 'mysql2';
+import { PrismaClient } from '@prisma/client';
+import bodyParser from 'body-parser';
 
-import { Intention } from '../src/entity/intention';
-import { IntentionRepository } from '../src/repository/IntentionRepository';
+const prisma = new PrismaClient();
 
 const app = express();
-const port = 4000;
 
-const mysql = require('mysql2');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-const conn = mysql.createConnection({
-  host: "localhost",
-  port : 3000,
-  username: "root",
-  password: "Root123",
-  database: "intencoes",
-});
-
-app.use(express.json());
-
-app.post('/intencoes', async (req: Request, res: Response) => {
+app.get('/intentions', async (req: Request, res: Response) => {
   try {
-    const { name, products, address } = req.body;
-
-    const intention = new Intention();
-    intention.name = name;
-    intention.products = products;
-    intention.address = address;
-    
-
-    const connection = await conn(); 
-
-    const intentionRepository = connection.getCustomRepository(IntentionRepository);
-    const createdIntention = await intentionRepository.createIntention(intention);
-
-    res.status(201).json(createdIntention);
+    const intentions = await prisma.intention.findMany();
+    res.json(intentions);
   } catch (error) {
-    console.error('Erro ao criar intenção:', error);
-    res.status(500).json({ error: 'Erro ao criar intenção' });
+    console.error('Erro ao buscar as intenções:', error);
+      res.status(500).json({ error: 'Erro ao buscar as intenções.' });
   }
 });
 
-app.get('/intencoes', async (_req: Request, res: Response) => {
-  try {
-    const connection = await conn(); 
 
-    const intentionRepository = connection.getCustomRepository(IntentionRepository);
-    const intentions = await intentionRepository.getAllIntentions();
+app.post('/intentions', async (req: Request, res: Response) => {
+  try {
+    const {address, name, product} = req.body;  
+    const intentions = await prisma.intention.create({
+      data: {
+        address,
+        name,
+        product
+      },
+    })
 
     res.json(intentions);
   } catch (error) {
-    console.error('Erro ao listar intenções:', error);
-    res.status(500).json({ error: 'Erro ao listar intenções' });
+    console.error('Erro ao buscar as intenções:', error);
+    res.status(500).json({ error: 'Erro ao buscar as intenções.' });
   }
-});
+})
 
-
-conn().then(() => {
-  app.listen(port, () => {
-    console.log(`Servidor rodando em http://localhost:${port}`);
-  });
-});
+app.listen(3333, () => console.log('rodando API'));
