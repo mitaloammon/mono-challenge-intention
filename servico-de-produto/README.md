@@ -65,4 +65,4 @@ Certifique-se de ter as seguintes ferramentas instaladas em sua máquina:
 
 - rode no seu terminal
 
-  `npx ts-node src/index.ts`
+  `npm run dev`
