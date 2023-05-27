@@ -34,7 +34,7 @@ atenda aos seguintes requisitos:
 
   http://127.0.0.1:8000/api/products
 
-## Projeto Serviço de Intenção:
+## Projeto Serviço de Intenção
 
 Desenvolvido ultilizando a linguagem TypeScript.
 
