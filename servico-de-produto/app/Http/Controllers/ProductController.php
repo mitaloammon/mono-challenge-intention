@@ -9,11 +9,17 @@ use Illuminate\Support\Facades\Http;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index($id)
     {
-        $response = Http::get('https://fakestoreapi.com/products');
-        $products = json_decode($response->getBody(), true);
+        /* Listando produto por ID */
+        $response = Http::get('https://fakestoreapi.com/products' . $id);
 
-        return response()->json($products);
+        if ($response->ok()) {
+            $product = $response->json();
+
+            return response()->json($product);
+        }
+
+        return response()->json(['error' => 'Produto não encontrado.'], 404);
     }
 }
