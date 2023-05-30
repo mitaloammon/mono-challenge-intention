@@ -6,7 +6,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\IntentionController;
 
 
-Route::resource("/products", ProductController::class);
+Route::resource("/products/{id}", ProductController::class);
 
 Route::post('/intentions', [IntentionController::class, 'store']);
 
