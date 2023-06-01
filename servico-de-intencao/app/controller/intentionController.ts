@@ -4,6 +4,7 @@ import { Request, Response } from 'express';
 const prisma = new PrismaClient();
 
 export const getAllIntentions = async (req: Request , res: Response) => {
+  console.log("ola")
     try {
       const intention = await prisma.intention.findMany();
       res.send(intention);

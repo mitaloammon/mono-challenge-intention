@@ -11,16 +11,5 @@ class intention extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = [
-
-        'id',
-        'title',
-        'price',
-        'category',
-        'description',
-        'image'
-
-    ];
-
     use HasFactory;
 }
