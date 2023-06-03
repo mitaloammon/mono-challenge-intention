@@ -1,0 +1,61 @@
+version: '3'
+services:
+  api-product:
+    container_name: api-product
+    image: api-product
+    entrypoint: ./docker-php-entrypoint
+    build:
+      context: ./servico-de-produto
+      dockerfile: Dockerfile.product
+    volumes:
+      - ./servico-de-produto:/var/www/html
+    networks:
+      - mono-intention
+
+  nginx:
+    image: nginx:alpine
+    restart: unless-stopped
+    ports:
+      - "8000:80"
+    volumes:
+      - ./servico-de-produto:/var/www/html
+      - ./servico-de-produto/nginx:/etc/nginx/conf.d/
+    networks:
+      - mono-intention
+  
+  api-intention:
+    container_name: api-intention
+    image: api-intention
+    build:
+      context: ./servico-de-intencao
+      dockerfile: Dockerfile.intention
+    depends_on:
+      - db
+    volumes:
+      - ./servico-de-intencao:/app/data
+    networks:
+      - mono-intention
+    command: npm run start:dev
+  
+  db:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: yes
+      MYSQL_DATABASE: intencoes
+      MYSQL_PASSWORD: ''
+    volumes:
+      - ./data/mysql:/app 
+    networks:
+      - mono-intention
+
+volumes:
+  data:
+    driver: local
+
+networks:
+  mono-intention:
+    driver: bridge
+
+  
+

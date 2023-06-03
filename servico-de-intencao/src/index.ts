@@ -3,7 +3,6 @@ import { PrismaClient } from '@prisma/client';
 import bodyParser from 'body-parser';
 import {routes} from '../app/routes/index';
 
-
 const prisma = new PrismaClient();
 
 const app = express();
@@ -11,9 +10,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
 app.use('/intentions', routes);
-
 
 app.get('/intentions', async (req: Request, res: Response) => {
   try {
@@ -31,18 +28,14 @@ app.get('/intentions', async (req: Request, res: Response) => {
   }
 });
 
-
 app.post('/intentions', async (req: Request, res: Response) => {
     try {
 
     const { name, products, address } = req.body;
-    console.log(name)
-    console.log(products)
-    console.log(address)
+   
     const intentions = await prisma.intention.create({
       data: {
-        name,
-        
+        name,       
         Products: {
           createMany: {
             data: products
@@ -58,7 +51,7 @@ app.post('/intentions', async (req: Request, res: Response) => {
         address: true
       }
     });
-    
+        
     res.json(intentions);
 
   } catch (error) {
@@ -67,6 +60,6 @@ app.post('/intentions', async (req: Request, res: Response) => {
   }
 })
 
-const PORT = 3333;
+const PORT = 3456;
 
 app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
