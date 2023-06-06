@@ -26,10 +26,6 @@ atenda aos seguintes requisitos:
 
   `composer install`
 
-- Execute as migrations
-
-  `php artisan migrate --seed`
-
 - Rode no seu terminal
 
   `php artisan serve`
@@ -37,6 +33,13 @@ atenda aos seguintes requisitos:
 - Rode em seu navegador
 
   http://127.0.0.1:8000/api/products
+  
+ ### Rotas
+ 
+ Selecione o produto por id:
+ 
+ - Route::resource("[/products/{id}](http://127.0.0.1:8000/api/products/id)", ProductController::class)
+ 
 
 ## Projeto Serviço de Intenção
 
