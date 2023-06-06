@@ -32,13 +32,7 @@ app.post('/intentions', async (req: Request, res: Response) => {
     try {
 
     const { name, products, address } = req.body;
-<<<<<<< HEAD
-   
-=======
-    //console.log(name)
-    //console.log(products)
-    //console.log(address)
->>>>>>> c99acdf37627d95f5542db10f68e972863eb69bc
+
     const intentions = await prisma.intention.create({
       data: {
         name,       
