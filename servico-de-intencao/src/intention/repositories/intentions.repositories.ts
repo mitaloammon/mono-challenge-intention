@@ -14,7 +14,7 @@ export class IntentionRepository {
       return await this.prisma.intention.create({
         data: {
           name,       
-          Products: {
+          products: {
             createMany: {
               data: products
             } 
@@ -25,7 +25,7 @@ export class IntentionRepository {
         },
         include:
         {
-          Products: true,
+          products: true,
           address: true
         }
       });
