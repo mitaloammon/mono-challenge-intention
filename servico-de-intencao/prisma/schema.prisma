@@ -14,9 +14,36 @@ datasource db {
 model Intention {
   id        Int     @id @default(autoincrement())
   name      String?
-  product   String?
-  address   String?
+  addressId Int?    @unique
 
+  address  Address?
+  Products Products[]
 
   @@map("Intentions")
+}
+
+model Address {
+  id          Int     @id @default(autoincrement())
+  city        String?
+  uf          String?
+  country     String?
+  intentionId Int?    @unique
+
+  intentions Intention? @relation(fields: [intentionId], references: [id])
+
+  @@map("Address")
+}
+
+model Products {
+  id          Int     @id @default(autoincrement())
+  title       String?
+  price       Int?
+  category    String?
+  description String?
+  image       String?
+  intentionId Int?    @unique
+
+  intentions Intention? @relation(fields: [intentionId], references: [id])
+
+  @@map("Products")
 }
