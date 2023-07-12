@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('intentions_list', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->integer('product_id')->unsigned();
-            $table->integer('addresses_id')->unsigned();
+
+            $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('addresses_id');
 
             $table->foreign('product_id')->references('id')->on('products_list');
             $table->foreign('addresses_id')->references('id')->on('addresses_list');
