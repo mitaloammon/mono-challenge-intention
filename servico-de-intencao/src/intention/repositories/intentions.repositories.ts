@@ -2,14 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../../src/modules/prisma';
 import { CreateIntentionDto } from '../../../src/intention/dto/create-intention.dto';
 
-
 @Injectable()
 export class IntentionRepository {
   constructor(private prisma: PrismaService) {}
 
   async create(data: CreateIntentionDto){
     const { name, products, address } = data;
-
+ 
     try{
       return await this.prisma.intention.create({
         data: {

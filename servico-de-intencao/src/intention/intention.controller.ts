@@ -27,9 +27,4 @@ export class IntentionController {
   update(@Param('id') id: string, @Body() updateIntentionDto: UpdateIntentionDto) {
     return this.intentionService.update(+id, updateIntentionDto);
   }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.intentionService.remove(+id);
-  }
 }

@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Intention;
+use App\Models\Address;
 use Illuminate\Http\Request;
 
-class IntentionController extends Controller
+class AddressController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return Intention::with('product')->get();
+        //
     }
 
     /**
@@ -28,13 +28,13 @@ class IntentionController extends Controller
      */
     public function store(Request $request)
     {
-        return response(Intention::create($request->all()));
+        //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Intention $products)
+    public function show(Address $address)
     {
         //
     }
@@ -42,7 +42,7 @@ class IntentionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Intention $products)
+    public function edit(Address $address)
     {
         //
     }
@@ -50,7 +50,7 @@ class IntentionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Intention $products)
+    public function update(Request $request, Address $address)
     {
         //
     }
@@ -58,7 +58,7 @@ class IntentionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Intention $products)
+    public function destroy(Address $address)
     {
         //
     }

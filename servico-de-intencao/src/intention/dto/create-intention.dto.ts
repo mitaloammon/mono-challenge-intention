@@ -39,18 +39,17 @@ export class Products {
 
     @ApiProperty()
     @IsString({
-        each: true,
+    each: true,
     })
     @IsNotEmpty({
-        each: true,
+    each: true,
     })
     @Length(1, 50, {
-        each: true,
+    each: true,
     })
     title: string;
-
     @IsNotEmpty({
-        each: true,
+    each: true,
     })
     @ApiProperty()
     @IsNumber()
@@ -58,31 +57,30 @@ export class Products {
 
     @ApiProperty()
     @IsString({
-        each: true,
+    each: true,
     })
     @Length(1, 50, {
-        each: true,
+    each: true,
     })
     @IsNotEmpty({
-        each: true,
+    each: true,
     })
     category: string;
 
     @ApiProperty()
     @IsString({
-        each: true,
+    each: true,
     })
     @Length(1, 255, {
-        each: true,
+    each: true,
     })
     description: string;
-
     @IsNotEmpty({
-        each: true,
+    each: true,
     })
     @ApiProperty()
     @IsString({
-        each: true,
+    each: true,
     })
     image: string;
 }
