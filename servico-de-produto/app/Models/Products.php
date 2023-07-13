@@ -15,5 +15,10 @@ class Products extends Model
     protected $guarded = ['id'];
 
 
+    public function intention(): HasMany
+    {
+        return $this->hasMany(Intention::class, 'product_id', 'id');
+    }
+
     use HasFactory;
 }

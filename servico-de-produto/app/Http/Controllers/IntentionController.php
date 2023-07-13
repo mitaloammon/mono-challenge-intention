@@ -12,7 +12,7 @@ class IntentionController extends Controller
      */
     public function index()
     {
-        return Intention::with('product')->get();
+        return Intention::with('product', 'address')->get();
     }
 
     /**

@@ -12,7 +12,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        //
+        return Products::with('intention')->get();
     }
 
     /**
@@ -28,7 +28,7 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return response(Products::create($request->all()));
     }
 
     /**
