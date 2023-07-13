@@ -12,7 +12,12 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        return Products::with('intention')->get();
+        try {
+            $product = Products::with('intention')->get();
+            return response()->json($product);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failure to retrieve product'], 500);
+        }
     }
 
     /**

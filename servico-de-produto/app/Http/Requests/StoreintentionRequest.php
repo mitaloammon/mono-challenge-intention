@@ -22,17 +22,13 @@ class StoreIntentionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'string|required|min:3|max:100',
-            'address' => 'string|required|max:100',
-            'city' => 'string|required|max:100',
-            'uf' => 'string|required|max:100',
-            'country' => 'string|required|max:100',
+            'name' => 'string|required|max:100',
         ];
     }
     public function messages()
     {
         return [
-            'address.id' => 'required',
+            'intentions_list.id' => 'required',
         ];
     }
 }

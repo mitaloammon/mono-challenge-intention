@@ -10,7 +10,7 @@ class Address extends Model
 
     protected $table = 'addresses';
 
-    protected $fillable = ['id', 'uf', 'city', 'country', 'intentionId'];
+    protected $fillable = ['id', 'uf', 'address', 'city', 'country', 'intentionId'];
 
     protected $guarded = ['id'];
 

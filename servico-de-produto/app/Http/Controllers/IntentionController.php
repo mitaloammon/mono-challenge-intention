@@ -12,7 +12,12 @@ class IntentionController extends Controller
      */
     public function index()
     {
-        return Intention::with('product', 'address')->get();
+        try {
+            $intentions = Intention::with('product', 'address')->get();
+            return response()->json($intentions);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failure to retrieve intentions'], 500);
+        }
     }
 
     /**
@@ -28,7 +33,12 @@ class IntentionController extends Controller
      */
     public function store(Request $request)
     {
-        return response(Intention::create($request->all()));
+        try {
+            $intentions = Intention::create($request->all());
+            return response()->json($intentions, 201);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failure to create intention'], 500);
+        }
     }
 
     /**
