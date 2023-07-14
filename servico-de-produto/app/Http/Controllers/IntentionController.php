@@ -68,8 +68,16 @@ class IntentionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Intention $products)
+    public function destroy($id)
     {
-        //
+        $intentions = Intention::where('id', $id);
+
+        if (!$intentions) {
+            return response()->json(['message' => 'Intention not found!'], 404);
+        }
+
+        $intentions->delete();
+
+        return response()->json(['message' => 'Intention removed!!!']);
     }
 }
